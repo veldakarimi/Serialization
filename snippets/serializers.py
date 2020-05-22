@@ -9,3 +9,9 @@ class SnippetSerializer(serializers.Serializer):
     linenos = serializers.BooleanField(required=False)
     language = serializers.ChoiceField(choices=LANGUAGE_CHOICES, default='python')
     style = serializers.ChoiceField(choices=STYLE_CHOICES, default='friendly')
+    
+    def create(self, validated_data):
+        """
+        Create and return a new `Snippet` instance, given the validated data.
+        """
+        return Snippet.objects.create(**validated_data)
