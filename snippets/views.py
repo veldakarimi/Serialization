@@ -5,7 +5,7 @@ from rest_framework.parsers import JSONParser
 from snippets.models import Snippet
 from snippets.serializers import SnippetSerializer
 
-@csrf_exempt
+@csrf_exempt #no need for token
 def snippet_list(request):
     """
     List all code snippets, or create a new snippet.
@@ -20,5 +20,5 @@ def snippet_list(request):
         serializer = SnippetSerializer(data=data)
         if serializer.is_valid():
             serializer.save()
-            return JsonResponse(serializer.data, status=201)
-        return JsonResponse(serializer.errors, status=400)
+            return JsonResponse(serializer.data, status=201) #successfully created
+        return JsonResponse(serializer.errors, status=400)#bad request
